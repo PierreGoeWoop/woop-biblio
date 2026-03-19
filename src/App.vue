@@ -91,42 +91,88 @@
 
         <!-- Zoom control -->
         <div class="zoom-control">
-          <button class="zoom-btn" @click="zoomOut" :disabled="zoom <= 1" aria-label="Réduire">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <line x1="3" y1="8" x2="13" y2="8"/>
+          <button
+            class="zoom-btn"
+            @click="zoomOut"
+            :disabled="zoom <= 1"
+            aria-label="Réduire"
+          >
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <line x1="3" y1="8" x2="13" y2="8" />
             </svg>
           </button>
           <input
             type="range"
             class="zoom-slider"
             v-model.number="zoom"
-            min="1" max="5" step="1"
+            min="1"
+            max="5"
+            step="1"
             aria-label="Zoom de la grille"
           />
-          <button class="zoom-btn" @click="zoomIn" :disabled="zoom >= 5" aria-label="Agrandir">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <line x1="8" y1="3" x2="8" y2="13"/>
-              <line x1="3" y1="8" x2="13" y2="8"/>
+          <button
+            class="zoom-btn"
+            @click="zoomIn"
+            :disabled="zoom >= 5"
+            aria-label="Agrandir"
+          >
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <line x1="8" y1="3" x2="8" y2="13" />
+              <line x1="3" y1="8" x2="13" y2="8" />
             </svg>
           </button>
         </div>
 
-        <button class="theme-toggle" @click="toggleDark" :aria-label="isDark ? 'Passer en mode clair' : 'Passer en mode sombre'">
+        <button
+          class="theme-toggle"
+          @click="toggleDark"
+          :aria-label="
+            isDark ? 'Passer en mode clair' : 'Passer en mode sombre'
+          "
+        >
           <!-- Sun -->
-          <svg v-if="isDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <svg
+            v-if="isDark"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
           <!-- Moon -->
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          <svg
+            v-else
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
           </svg>
         </button>
 
@@ -149,44 +195,44 @@
 
       <!-- Gallery -->
       <div class="gallery-scroll">
-      <main
-        class="gallery"
-        :style="{ '--card-min': cardMinSize + 'px' }"
-        :data-zoom="zoom"
-      >
-        <article
-          v-for="image in displayedImages"
-          :key="image.filename"
-          class="card"
-          @click="selectedImage = image"
+        <main
+          class="gallery"
+          :style="{ '--card-min': cardMinSize + 'px' }"
+          :data-zoom="zoom"
         >
-          <div class="card-img">
-            <img
-              :src="imgUrl(image.filename)"
-              :alt="image.name"
-              loading="lazy"
-            />
-          </div>
-          <div class="card-body">
-            <p class="card-name" :title="image.name">{{ image.name }}</p>
-            <div class="card-tags">
-              <span
-                v-for="tag in image.tags.slice(0, 3)"
-                :key="tag"
-                class="chip"
-                >{{ tag }}</span
-              >
+          <article
+            v-for="image in displayedImages"
+            :key="image.filename"
+            class="card"
+            @click="selectedImage = image"
+          >
+            <div class="card-img">
+              <img
+                :src="imgUrl(image.filename)"
+                :alt="image.name"
+                loading="lazy"
+              />
             </div>
-          </div>
-        </article>
+            <div class="card-body">
+              <p class="card-name" :title="image.name">{{ image.name }}</p>
+              <div class="card-tags">
+                <span
+                  v-for="tag in image.tags.slice(0, 3)"
+                  :key="tag"
+                  class="chip"
+                  >{{ tag }}</span
+                >
+              </div>
+            </div>
+          </article>
 
-        <p v-if="filteredImages.length === 0" class="empty-state">
-          Aucune illustration trouvée
-        </p>
+          <p v-if="filteredImages.length === 0" class="empty-state">
+            Aucune illustration trouvée
+          </p>
 
-        <!-- Infinite scroll sentinel -->
-        <div ref="sentinel" class="scroll-sentinel"></div>
-      </main>
+          <!-- Infinite scroll sentinel -->
+          <div ref="sentinel" class="scroll-sentinel"></div>
+        </main>
       </div>
     </div>
 
@@ -225,20 +271,44 @@
             <div class="modal-body">
               <h3 class="modal-name">{{ selectedImage.name }}</h3>
               <div class="modal-actions">
-                <button class="action-btn" @click="downloadImage(selectedImage)" title="Télécharger l'image">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
+                <button
+                  class="action-btn"
+                  @click="downloadImage(selectedImage)"
+                  title="Télécharger l'image"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
                   Télécharger
                 </button>
-                <button class="action-btn" @click="copyImage(selectedImage)" title="Copier l'image">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2"/>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                <button
+                  class="action-btn"
+                  @click="copyImage(selectedImage)"
+                  title="Copier l'image"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                    <path
+                      d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    />
                   </svg>
-                  {{ copyFeedback || 'Copier' }}
+                  {{ copyFeedback || "Copier" }}
                 </button>
               </div>
               <div class="modal-tags">
@@ -266,7 +336,14 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from "vue";
+import {
+  ref,
+  computed,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  nextTick,
+} from "vue";
 import catalog from "./catalog.json";
 import { scoreImage, hasFuzzyHits } from "./fuzzy.js";
 
@@ -295,8 +372,12 @@ const cardMinSize = computed(() => ZOOM_SIZES[zoom.value - 1]);
 
 watch(zoom, (v) => localStorage.setItem("zoom", String(v)));
 
-function zoomIn()  { if (zoom.value < 5) zoom.value++; }
-function zoomOut() { if (zoom.value > 1) zoom.value--; }
+function zoomIn() {
+  if (zoom.value < 5) zoom.value++;
+}
+function zoomOut() {
+  if (zoom.value > 1) zoom.value--;
+}
 
 // ── Infinite scroll ──────────────────────────────────────
 const PAGE_SIZE = 9;
@@ -318,7 +399,9 @@ function loadMore() {
   });
 }
 
-watch([query, activeTags], () => { visibleCount.value = PAGE_SIZE; });
+watch([query, activeTags], () => {
+  visibleCount.value = PAGE_SIZE;
+});
 
 onMounted(() => {
   const saved = localStorage.getItem("theme");
@@ -327,8 +410,10 @@ onMounted(() => {
   applyTheme(isDark.value);
 
   observer = new IntersectionObserver(
-    (entries) => { if (entries[0].isIntersecting) loadMore(); },
-    { threshold: 0.1, root: document.querySelector('.gallery-scroll') },
+    (entries) => {
+      if (entries[0].isIntersecting) loadMore();
+    },
+    { threshold: 0.1, root: document.querySelector(".gallery-scroll") },
   );
   if (sentinel.value) observer.observe(sentinel.value);
 });
@@ -348,7 +433,9 @@ const totalTags = computed(
 const popularTags = computed(() => {
   const freq = {};
   catalog.forEach((img) =>
-    img.tags.forEach((t) => { freq[t] = (freq[t] || 0) + 1; }),
+    img.tags.forEach((t) => {
+      freq[t] = (freq[t] || 0) + 1;
+    }),
   );
   return Object.entries(freq)
     .map(([name, count]) => ({ name, count }))
@@ -381,16 +468,16 @@ const displayedImages = computed(() =>
 );
 
 // ── Image actions ───────────────────────────────────────
-const copyFeedback = ref('');
+const copyFeedback = ref("");
 
 async function downloadImage(image) {
   const url = imgUrl(image.filename);
   const res = await fetch(url);
   const blob = await res.blob();
   const blobUrl = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = blobUrl;
-  a.download = image.filename.split('/').pop();
+  a.download = image.filename.split("/").pop();
   a.click();
   URL.revokeObjectURL(blobUrl);
 }
@@ -401,11 +488,13 @@ async function copyImage(image) {
     const res = await fetch(url);
     const blob = await res.blob();
     await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-    copyFeedback.value = 'Copié !';
+    copyFeedback.value = "Copié !";
   } catch {
-    copyFeedback.value = 'Erreur';
+    copyFeedback.value = "Erreur";
   } finally {
-    setTimeout(() => { copyFeedback.value = ''; }, 2000);
+    setTimeout(() => {
+      copyFeedback.value = "";
+    }, 2000);
   }
 }
 
