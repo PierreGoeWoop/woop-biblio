@@ -376,7 +376,9 @@ function extractInfo(filename) {
     const translations = FR_TAGS[enTag];
     if (translations) {
       for (const fr of translations) {
-        const parts = normalizeFr(fr).split(/\s+/).filter((p) => p.length >= 2);
+        const parts = normalizeFr(fr)
+          .split(/\s+/)
+          .filter((p) => p.length >= 2);
         frTags.push(...parts);
       }
     }

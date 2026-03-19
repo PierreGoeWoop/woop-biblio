@@ -30,7 +30,12 @@
             class="search-input"
             autocomplete="off"
           />
-          <span v-if="fuzzyActive" class="fuzzy-badge" title="Résultats approximatifs">≈</span>
+          <span
+            v-if="fuzzyActive"
+            class="fuzzy-badge"
+            title="Résultats approximatifs"
+            >≈</span
+          >
           <span class="count-badge">{{ filteredImages.length }}</span>
         </label>
       </div>
@@ -170,11 +175,7 @@ const popularTags = computed(() => {
 
 // Scored & sorted results (query can be fuzzy / approximate)
 const scoredImages = computed(() => {
-  const tokens = query.value
-    .toLowerCase()
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean);
+  const tokens = query.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const tags = activeTags.value;
 
   const results = catalog
