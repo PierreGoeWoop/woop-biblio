@@ -512,5 +512,13 @@ function toggleTag(tag) {
 function clearFilters() {
   query.value = "";
   activeTags.value = [];
+  visibleCount.value = PAGE_SIZE;
+  nextTick(() => {
+    document.querySelector(".gallery-scroll")?.scrollTo({ top: 0 });
+    if (sentinel.value && observer) {
+      observer.unobserve(sentinel.value);
+      observer.observe(sentinel.value);
+    }
+  });
 }
 </script>
