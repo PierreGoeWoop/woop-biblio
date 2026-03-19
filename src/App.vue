@@ -401,7 +401,7 @@ function loadMore() {
 
 watch([query, activeTags], () => {
   visibleCount.value = PAGE_SIZE;
-});
+}, { deep: true });
 
 onMounted(() => {
   const saved = localStorage.getItem("theme");
