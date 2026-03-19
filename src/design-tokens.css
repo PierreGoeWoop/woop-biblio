@@ -1,0 +1,186 @@
+/* ══════════════════════════════════════════════════════════
+   SubMarine Design System — Local Token Implementation
+   Mirrors the spec of @woop/design-tokens
+   ══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Font Families ─────────────────────────────────────── */
+  --font-sans:    'Work Sans', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-serif:   'Source Serif 4', serif;
+
+  /* ── Spacing Scale (px) ────────────────────────────────── */
+  --spacing-0:   0px;
+  --spacing-2:   2px;
+  --spacing-3:   3px;
+  --spacing-4:   4px;
+  --spacing-6:   6px;
+  --spacing-8:   8px;
+  --spacing-10:  10px;
+  --spacing-12:  12px;
+  --spacing-14:  14px;
+  --spacing-16:  16px;
+  --spacing-20:  20px;
+  --spacing-24:  24px;
+  --spacing-32:  32px;
+  --spacing-40:  40px;
+  --spacing-48:  48px;
+  --spacing-64:  64px;
+
+  /* ── Border Radius Scale ───────────────────────────────── */
+  --radius-0:    0px;
+  --radius-2:    2px;
+  --radius-4:    4px;
+  --radius-6:    6px;
+  --radius-8:    8px;
+  --radius-10:   10px;
+  --radius-12:   12px;
+  --radius-16:   16px;
+  --radius-20:   20px;
+  --radius-24:   24px;
+  --radius-28:   28px;
+  --radius-full: 999px;
+
+  /* ── Heading Typography ────────────────────────────────── */
+  --text-heading-2xl: 64px;  --fw-heading-2xl: 700;  --lh-heading-2xl: 1.05; --ls-heading-2xl: -0.03em;
+  --text-heading-xl:  48px;  --fw-heading-xl:  700;  --lh-heading-xl:  1.1;  --ls-heading-xl:  -0.02em;
+  --text-heading-lg:  36px;  --fw-heading-lg:  700;  --lh-heading-lg:  1.15; --ls-heading-lg:  -0.01em;
+  --text-heading-md:  24px;  --fw-heading-md:  700;  --lh-heading-md:  1.2;  --ls-heading-md:  -0.01em;
+  --text-heading-sm:  20px;  --fw-heading-sm:  700;  --lh-heading-sm:  1.25; --ls-heading-sm:  0;
+  --text-heading-xs:  16px;  --fw-heading-xs:  700;  --lh-heading-xs:  1.3;  --ls-heading-xs:  0;
+
+  /* ── SubHeading Typography ─────────────────────────────── */
+  --text-subheading-lg:  18px; --fw-subheading-lg:  500; --lh-subheading-lg:  1.4;  --ls-subheading-lg:  0;
+  --text-subheading-md:  16px; --fw-subheading-md:  500; --lh-subheading-md:  1.4;  --ls-subheading-md:  0;
+  --text-subheading-sm:  14px; --fw-subheading-sm:  500; --lh-subheading-sm:  1.45; --ls-subheading-sm:  0;
+  --text-subheading-xs:  12px; --fw-subheading-xs:  500; --lh-subheading-xs:  1.5;  --ls-subheading-xs:  0;
+  --text-subheading-2xs: 11px; --fw-subheading-2xs: 500; --lh-subheading-2xs: 1.5;  --ls-subheading-2xs: 0.01em;
+
+  /* ── Label Typography ──────────────────────────────────── */
+  --text-label-xl:  18px; --fw-label-xl:  500; --lh-label-xl:  1.35; --ls-label-xl:  0;
+  --text-label-lg:  16px; --fw-label-lg:  500; --lh-label-lg:  1.4;  --ls-label-lg:  0;
+  --text-label-md:  15px; --fw-label-md:  500; --lh-label-md:  1.4;  --ls-label-md:  0;
+  --text-label-sm:  14px; --fw-label-sm:  500; --lh-label-sm:  1.4;  --ls-label-sm:  0;
+  --text-label-xs:  12px; --fw-label-xs:  500; --lh-label-xs:  1.4;  --ls-label-xs:  0.01em;
+  --text-label-2xs: 11px; --fw-label-2xs: 500; --lh-label-2xs: 1.4;  --ls-label-2xs: 0.02em;
+
+  /* ── Paragraph Typography ──────────────────────────────── */
+  --text-paragraph-xl:  18px; --fw-paragraph-xl:  400; --lh-paragraph-xl:  1.65; --ls-paragraph-xl:  0;
+  --text-paragraph-lg:  16px; --fw-paragraph-lg:  400; --lh-paragraph-lg:  1.65; --ls-paragraph-lg:  0;
+  --text-paragraph-md:  15px; --fw-paragraph-md:  400; --lh-paragraph-md:  1.6;  --ls-paragraph-md:  0;
+  --text-paragraph-sm:  14px; --fw-paragraph-sm:  400; --lh-paragraph-sm:  1.6;  --ls-paragraph-sm:  0;
+  --text-paragraph-xs:  12px; --fw-paragraph-xs:  400; --lh-paragraph-xs:  1.55; --ls-paragraph-xs:  0;
+  --text-paragraph-2xs: 11px; --fw-paragraph-2xs: 400; --lh-paragraph-2xs: 1.5;  --ls-paragraph-2xs: 0;
+
+  /* ── Primitive Color Scales ────────────────────────────── */
+  --color-neutral-50:  #FDFDFD;
+  --color-neutral-100: #F4F7FB;
+  --color-neutral-200: #E8E8ED;
+  --color-neutral-300: #C5C6D3;
+  --color-neutral-400: #8C8EA6;
+  --color-neutral-500: #6B6D8A;
+  --color-neutral-600: #47495B;
+  --color-neutral-700: #262836;
+  --color-neutral-800: #22242F;
+  --color-neutral-900: #1D1B25;
+  --color-neutral-950: #141118;
+
+  --color-primary-50:  #EFF1FF;
+  --color-primary-100: #ECE7FF;
+  --color-primary-200: #D5C9FF;
+  --color-primary-300: #B7A9E3;
+  --color-primary-400: #9D7FE5;
+  --color-primary-500: #7053CD;
+  --color-primary-600: #5E40C0;
+  --color-primary-700: #4F32AF;
+  --color-primary-800: #3D2590;
+  --color-primary-900: #2A327B;
+
+  --color-error-50:  #FFF0F0; --color-error-100: #FFE0E0;
+  --color-error-500: #E05260; --color-error-700: #C0374A;
+  --color-error-900: #8E1F2F;
+
+  --color-success-50:  #F0FFF5; --color-success-100: #D4F7E0;
+  --color-success-500: #28A745; --color-success-700: #1A7A33;
+  --color-success-900: #0E4A1E;
+
+  --color-blue-50:  #EFF6FF; --color-blue-500: #3B82F6; --color-blue-900: #1E3A5F;
+  --color-yellow-50: #FFFBEB; --color-yellow-500: #F59E0B; --color-yellow-900: #713F12;
+  --color-orange-50: #FFF7ED; --color-orange-500: #F97316; --color-orange-900: #7C2D12;
+
+  /* ── Light Mode Semantic Colors ────────────────────────── */
+  --background:            var(--color-neutral-100);
+  --card:                  #FFFFFF;
+  --muted:                 var(--color-neutral-200);
+  --popover:               #FFFFFF;
+  --foreground:            var(--color-neutral-700);
+  --card-foreground:       var(--color-neutral-700);
+  --muted-foreground:      var(--color-neutral-500);
+  --primary:               var(--color-primary-700);
+  --primary-foreground:    #FFFFFF;
+  --secondary:             var(--color-neutral-200);
+  --secondary-foreground:  var(--color-neutral-600);
+  --accent:                var(--color-primary-500);
+  --accent-foreground:     #FFFFFF;
+  --destructive:           var(--color-error-500);
+  --destructive-foreground: #FFFFFF;
+  --success:               var(--color-success-500);
+  --success-foreground:    #FFFFFF;
+  --warning:               var(--color-yellow-500);
+  --warning-foreground:    var(--color-neutral-700);
+  --border:                rgba(0, 0, 0, 0.08);
+  --input-border:          var(--color-neutral-300);
+  --ring:                  var(--color-primary-700);
+
+  /* ── Light Mode Elevation ──────────────────────────────── */
+  --elevation-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --elevation-1:  0 2px 6px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --elevation-2:  0 4px 16px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --elevation-3:  0 8px 32px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.10);
+  --elevation-4:  0 16px 64px rgba(0, 0, 0, 0.24), 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* ── Focus Rings ───────────────────────────────────────── */
+  --focus-ring-primary:     0 0 0 3px rgba(79,  50,  175, 0.35);
+  --focus-ring-secondary:   0 0 0 3px rgba(140, 142, 166, 0.30);
+  --focus-ring-destructive: 0 0 0 3px rgba(220, 53,  69,  0.35);
+  --focus-ring-success:     0 0 0 3px rgba(25,  135, 84,  0.35);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Dark Mode Overrides
+   ══════════════════════════════════════════════════════════ */
+.dark {
+  --background:            var(--color-neutral-900);
+  --card:                  var(--color-neutral-800);
+  --muted:                 var(--color-neutral-700);
+  --popover:               var(--color-neutral-800);
+  --foreground:            var(--color-neutral-100);
+  --card-foreground:       var(--color-neutral-100);
+  --muted-foreground:      var(--color-neutral-400);
+  --primary:               var(--color-primary-500);
+  --primary-foreground:    #FFFFFF;
+  --secondary:             var(--color-neutral-700);
+  --secondary-foreground:  var(--color-neutral-300);
+  --accent:                var(--color-primary-500);
+  --accent-foreground:     #FFFFFF;
+  --destructive:           var(--color-error-500);
+  --destructive-foreground: #FFFFFF;
+  --success:               var(--color-success-500);
+  --success-foreground:    #FFFFFF;
+  --warning:               var(--color-yellow-500);
+  --warning-foreground:    var(--color-neutral-900);
+  --border:                rgba(255, 255, 255, 0.08);
+  --input-border:          var(--color-neutral-600);
+  --ring:                  var(--color-primary-500);
+
+  --elevation-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --elevation-1:  0 2px 8px rgba(0, 0, 0, 0.45);
+  --elevation-2:  0 4px 16px rgba(0, 0, 0, 0.55);
+  --elevation-3:  0 8px 32px rgba(0, 0, 0, 0.65);
+  --elevation-4:  0 16px 64px rgba(0, 0, 0, 0.80);
+
+  --focus-ring-primary:     0 0 0 3px rgba(112, 83,  205, 0.45);
+  --focus-ring-secondary:   0 0 0 3px rgba(140, 142, 166, 0.35);
+  --focus-ring-destructive: 0 0 0 3px rgba(224, 82,  96,  0.45);
+  --focus-ring-success:     0 0 0 3px rgba(40,  167, 69,  0.45);
+}
