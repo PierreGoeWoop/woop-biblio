@@ -330,12 +330,21 @@ body {
   color: var(--muted-foreground);
 }
 
+.topbar-left {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
 /* Zoom control */
 .zoom-control {
   display: flex;
   align-items: center;
   gap: var(--spacing-6);
-  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .zoom-btn {
@@ -448,7 +457,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-6);
-  flex: 1;
 }
 
 .filter-chip {
@@ -511,6 +519,37 @@ body {
   background: var(--input-border);
   border-radius: var(--radius-4);
 }
+
+/* ─── App Footer ─────────────────────────────────────── */
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding: var(--spacing-24) var(--spacing-24);
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-label-xs);
+  border-top: 1px solid var(--border);
+  margin-top: var(--spacing-16);
+}
+
+.app-footer-sep {
+  opacity: 0.4;
+}
+
+.app-footer-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.12s;
+}
+
+.app-footer-link:hover {
+  opacity: 0.75;
+}
+
 
 .gallery {
   padding: var(--spacing-16) var(--spacing-20);

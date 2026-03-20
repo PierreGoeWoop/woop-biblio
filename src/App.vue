@@ -99,10 +99,28 @@
     <div class="main">
       <!-- Topbar -->
       <header class="topbar">
-        <p class="topbar-title">
-          {{ filteredImages.length }}
-          <span class="topbar-count">illustrations</span>
-        </p>
+        <div class="topbar-left">
+          <p class="topbar-title">
+            {{ filteredImages.length }}
+            <span class="topbar-count">illustrations</span>
+          </p>
+
+          <Transition name="slide">
+            <div v-if="activeTags.length" class="active-filters">
+              <button
+                v-for="tag in activeTags"
+                :key="tag"
+                class="filter-chip"
+                @click="toggleTag(tag)"
+              >
+                #{{ tag }}&thinsp;×
+              </button>
+              <button class="clear-btn" @click="clearFilters">
+                Tout effacer
+              </button>
+            </div>
+          </Transition>
+        </div>
 
         <!-- Zoom control -->
         <div class="zoom-control">
@@ -190,22 +208,6 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
           </svg>
         </button>
-
-        <Transition name="slide">
-          <div v-if="activeTags.length" class="active-filters">
-            <button
-              v-for="tag in activeTags"
-              :key="tag"
-              class="filter-chip"
-              @click="toggleTag(tag)"
-            >
-              #{{ tag }}&thinsp;×
-            </button>
-            <button class="clear-btn" @click="clearFilters">
-              Tout effacer
-            </button>
-          </div>
-        </Transition>
       </header>
 
       <!-- Gallery -->
@@ -245,10 +247,20 @@
           <p v-if="filteredImages.length === 0" class="empty-state">
             Aucune illustration trouvée
           </p>
-
-          <!-- Infinite scroll sentinel -->
-          <div ref="sentinel" class="scroll-sentinel"></div>
         </main>
+
+        <footer class="app-footer">
+          <span>
+            Vous cherchez des icônes ?
+            <a
+              href="https://maker-broken-31079259.figma.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="app-footer-link"
+              >Parcourir la bibliothèque d’icônes →</a
+            >
+          </span>
+        </footer>
       </div>
     </div>
 
@@ -352,14 +364,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  computed,
-  watch,
-  onMounted,
-  onBeforeUnmount,
-  nextTick,
-} from "vue";
+import { ref, computed, watch, onMounted, nextTick } from "vue";
 import catalog from "./catalog.json";
 import modesList from "./modes.json";
 import { scoreImage, hasFuzzyHits } from "./fuzzy.js";
@@ -401,30 +406,9 @@ function zoomOut() {
   if (zoom.value > 1) zoom.value--;
 }
 
-// ── Infinite scroll ──────────────────────────────────────
-const PAGE_SIZE = 9;
-const visibleCount = ref(PAGE_SIZE);
-const sentinel = ref(null);
-let observer = null;
-
-function loadMore() {
-  if (visibleCount.value >= filteredImages.value.length) return;
-  visibleCount.value = Math.min(
-    visibleCount.value + PAGE_SIZE,
-    filteredImages.value.length,
-  );
-  nextTick(() => {
-    if (sentinel.value && observer) {
-      observer.unobserve(sentinel.value);
-      observer.observe(sentinel.value);
-    }
-  });
-}
-
 watch(
   [query, activeTags, selectedMode],
   () => {
-    visibleCount.value = PAGE_SIZE;
     failedImages.value = new Set();
   },
   { deep: true },
@@ -440,17 +424,7 @@ onMounted(() => {
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   isDark.value = saved ? saved === "dark" : prefersDark;
   applyTheme(isDark.value);
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) loadMore();
-    },
-    { threshold: 0.1, root: document.querySelector(".gallery-scroll") },
-  );
-  if (sentinel.value) observer.observe(sentinel.value);
 });
-
-onBeforeUnmount(() => observer?.disconnect());
 
 // ── Failed images ───────────────────────────────────────
 const failedImages = ref(new Set());
@@ -462,7 +436,13 @@ function onImgError(filename) {
 // ── Helpers ──────────────────────────────────────────────
 function imgUrl(filename) {
   const dir = selectedMode.value.replace(/ /g, "%20");
-  return import.meta.env.BASE_URL + "illustrations/" + dir + "/" + filename.replace(/ /g, "%20");
+  return (
+    import.meta.env.BASE_URL +
+    "illustrations/" +
+    dir +
+    "/" +
+    filename.replace(/ /g, "%20")
+  );
 }
 
 // ── Computed data ────────────────────────────────────────
@@ -505,9 +485,7 @@ const fuzzyActive = computed(() =>
 
 const filteredImages = computed(() => scoredImages.value.map((r) => r.img));
 
-const displayedImages = computed(() =>
-  filteredImages.value.slice(0, visibleCount.value),
-);
+const displayedImages = computed(() => filteredImages.value);
 
 // ── Image actions ───────────────────────────────────────
 const copyFeedback = ref("");
@@ -550,13 +528,8 @@ function toggleTag(tag) {
 function clearFilters() {
   query.value = "";
   activeTags.value = [];
-  visibleCount.value = PAGE_SIZE;
   nextTick(() => {
     document.querySelector(".gallery-scroll")?.scrollTo({ top: 0 });
-    if (sentinel.value && observer) {
-      observer.unobserve(sentinel.value);
-      observer.observe(sentinel.value);
-    }
   });
 }
 </script>
