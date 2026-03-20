@@ -819,4 +819,46 @@ body {
   transform: translateX(-6px);
 }
 
+/* ══════════════════════════════════════════════════════
+   MODE SELECTOR
+   ══════════════════════════════════════════════════════ */
+.mode-section {
+  padding-top: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.mode-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-16) var(--spacing-8);
+}
+
+.mode-btn {
+  padding: var(--spacing-4) var(--spacing-10);
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-label-xs);
+  font-weight: var(--fw-label-xs);
+  line-height: var(--lh-label-xs);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  white-space: nowrap;
+}
+
+.mode-btn:hover {
+  background: var(--muted);
+  color: var(--foreground);
+  border-color: var(--input-border);
+}
+
+.mode-btn--active {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--accent);
+}
+
 

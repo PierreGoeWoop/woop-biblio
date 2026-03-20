@@ -53,6 +53,21 @@
         </label>
       </div>
 
+      <!-- Mode selector -->
+      <div class="mode-section">
+        <span class="nav-section-label">Style</span>
+        <div class="mode-btns">
+          <button
+            v-for="mode in MODES"
+            :key="mode"
+            :class="['mode-btn', { 'mode-btn--active': selectedMode === mode }]"
+            @click="selectedMode = mode"
+          >
+            {{ mode }}
+          </button>
+        </div>
+      </div>
+
       <!-- Tag nav -->
       <div class="sidebar-section">
         <span class="nav-section-label">Tendances</span>
@@ -211,6 +226,7 @@
                 :src="imgUrl(image.filename)"
                 :alt="image.name"
                 loading="lazy"
+                @error="onImgError(image.filename)"
               />
             </div>
             <div class="card-body">
@@ -345,7 +361,13 @@ import {
   nextTick,
 } from "vue";
 import catalog from "./catalog.json";
+import modesList from "./modes.json";
 import { scoreImage, hasFuzzyHits } from "./fuzzy.js";
+
+// ── Modes ────────────────────────────────────────────────
+const MODES = modesList;
+
+const selectedMode = ref(localStorage.getItem("mode") ?? "Purple");
 
 // ── State ────────────────────────────────────────────────
 const query = ref("");
@@ -400,12 +422,18 @@ function loadMore() {
 }
 
 watch(
-  [query, activeTags],
+  [query, activeTags, selectedMode],
   () => {
     visibleCount.value = PAGE_SIZE;
+    failedImages.value = new Set();
   },
   { deep: true },
 );
+
+watch(selectedMode, (v) => {
+  localStorage.setItem("mode", v);
+  failedImages.value = new Set();
+});
 
 onMounted(() => {
   const saved = localStorage.getItem("theme");
@@ -424,9 +452,17 @@ onMounted(() => {
 
 onBeforeUnmount(() => observer?.disconnect());
 
+// ── Failed images ───────────────────────────────────────
+const failedImages = ref(new Set());
+
+function onImgError(filename) {
+  failedImages.value = new Set([...failedImages.value, filename]);
+}
+
 // ── Helpers ──────────────────────────────────────────────
 function imgUrl(filename) {
-  return import.meta.env.BASE_URL + filename.replace(/ /g, "%20");
+  const dir = selectedMode.value.replace(/ /g, "%20");
+  return import.meta.env.BASE_URL + "illustrations/" + dir + "/" + filename.replace(/ /g, "%20");
 }
 
 // ── Computed data ────────────────────────────────────────
@@ -450,10 +486,12 @@ const popularTags = computed(() => {
 const scoredImages = computed(() => {
   const tokens = query.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const tags = activeTags.value;
+  const failed = failedImages.value;
   const results = catalog
     .map((img) => ({ img, score: scoreImage(img, tokens) }))
     .filter(({ score, img }) => {
       if (score === 0) return false;
+      if (failed.has(img.filename)) return false;
       if (tags.length && !tags.every((t) => img.tags.includes(t))) return false;
       return true;
     });

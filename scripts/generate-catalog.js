@@ -3,8 +3,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const imagesDir = path.join(__dirname, "..", "Purple ");
+const illustrationsDir = path.join(__dirname, "..", "public", "illustrations");
+const imagesDir = path.join(illustrationsDir, "Purple");
 const outputFile = path.join(__dirname, "..", "src", "catalog.json");
+const modesFile = path.join(__dirname, "..", "src", "modes.json");
 
 // ─── Dictionnaire Anglais → Synonymes Français ────────────────────────────────
 // Chaque clé est un tag anglais tiré du nom de fichier.
@@ -404,3 +406,21 @@ console.log(`✓ ${allTags.length} tags uniques générés`);
 
 fs.writeFileSync(outputFile, JSON.stringify(catalog, null, 2), "utf-8");
 console.log(`✓ Catalogue écrit dans src/catalog.json`);
+
+// ─── Modes : liste tous les sous-dossiers de public/illustrations/ ────────────
+const modes = fs
+  .readdirSync(illustrationsDir)
+  .filter((name) => {
+    const full = path.join(illustrationsDir, name);
+    return fs.statSync(full).isDirectory();
+  })
+  .sort((a, b) => {
+    // "Purple" en premier, ensuite ordre alphabétique
+    if (a === "Purple") return -1;
+    if (b === "Purple") return 1;
+    return a.localeCompare(b, "fr", { sensitivity: "base" });
+  });
+
+fs.writeFileSync(modesFile, JSON.stringify(modes, null, 2), "utf-8");
+console.log(`✓ ${modes.length} modes détectés : ${modes.join(", ")}`);
+console.log(`✓ Modes écrits dans src/modes.json`);
