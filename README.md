@@ -1,6 +1,12 @@
-# Bibliothèque d'illustrations
+# Bibliothèque d'illustrations et d'icônes
 
-Interface de navigation et de recherche pour une collection d'illustrations PNG.
+> **© Woop — tous droits réservés. Ce dépôt n'est pas open source.**
+> Les illustrations, le code et les contenus sont la propriété de Woop et réservés à un usage interne. Le fait que ce dépôt soit public ne vaut pas licence : toute réutilisation sans autorisation est interdite. Voir [LICENSE](LICENSE).
+> Exception : les icônes proviennent de [Tabler Icons](https://tabler.io/icons) (licence MIT).
+
+Interface de navigation et de recherche pour une collection d'illustrations PNG et une bibliothèque d'icônes.
+
+Site : https://pierregoewoop.github.io/woop-biblio/ (icônes : `#/icons`)
 
 ---
 
@@ -117,6 +123,38 @@ Supprimer le fichier PNG dans `Purple/` (et dans les autres styles si besoin), p
 ```bash
 npm run catalog
 ```
+
+---
+
+## Icônes
+
+La page **Icônes** (`#/icons`) reprend l'ancien Icon Finder Figma. Elle permet de chercher parmi les ~5 200 icônes [Tabler](https://tabler.io/icons) (outline, filled, marques), de choisir une couleur de la palette Woop, l'épaisseur du trait et la taille d'export, puis de copier ou télécharger en PNG / SVG.
+
+Les fichiers ne sont **pas versionnés** : `npm run icons` (lancé automatiquement par `dev` et `build`) les génère dans `public/icons/` depuis le package `@tabler/icons`.
+
+Pour mettre à jour Tabler :
+
+```bash
+npm install -D --save-exact @tabler/icons@<version>
+npm run icons
+```
+
+Les icônes `brand-*` sont des logos tiers : à n'utiliser que pour représenter la marque concernée.
+
+---
+
+## Accès programmatique (skills, agents, scripts)
+
+Tout est servi en statique par GitHub Pages, sans authentification :
+
+| Ressource | URL |
+| --- | --- |
+| Index des icônes (nom, catégorie, tags, styles, `brand`) | `https://pierregoewoop.github.io/woop-biblio/icons/index.json` |
+| Icône SVG | `https://pierregoewoop.github.io/woop-biblio/icons/{outline\|filled}/{nom}.svg` |
+| Illustration PNG | `https://pierregoewoop.github.io/woop-biblio/illustrations/{Style}/{fichier}` |
+| Catalogue des illustrations | [`src/catalog.json`](src/catalog.json) dans ce dépôt |
+
+Les SVG Tabler utilisent `stroke="currentColor"` et `stroke-width="2"` : remplacer ces valeurs pour appliquer la charte (`#1D1B25`, trait `1.5`).
 
 ---
 

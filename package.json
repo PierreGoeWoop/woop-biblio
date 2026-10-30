@@ -4,15 +4,17 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "npm run icons && vite",
+    "build": "npm run icons && vite build",
     "preview": "vite preview",
-    "catalog": "node scripts/generate-catalog.js"
+    "catalog": "node scripts/generate-catalog.js",
+    "icons": "node scripts/generate-icons.js"
   },
   "dependencies": {
     "vue": "^3.5.22"
   },
   "devDependencies": {
+    "@tabler/icons": "3.50.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "vite": "^7.1.7"
   }

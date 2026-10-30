@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Icônes générées depuis @tabler/icons (npm run icons)
+public/icons
